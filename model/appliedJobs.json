@@ -1,0 +1,47 @@
+{
+  "jobs": [
+    {
+      "userId": "1",
+      "availableId": 1,
+      "title": "Frontend Developer Intern",
+      "company": "TechNova",
+      "location": "Remote",
+      "skills": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "React"
+      ],
+      "salary": "15,000/month",
+      "postedAt": "2026-01-28"
+    },
+    {
+      "userId": "2",
+      "availableId": 3,
+      "title": "Full Stack Developer",
+      "company": "DevSphere",
+      "location": "Hyderabad",
+      "skills": [
+        "React",
+        "Node.js",
+        "PostgreSQL"
+      ],
+      "salary": "10 LPA",
+      "postedAt": "2026-02-01"
+    },
+    {
+      "userId": "1",
+      "availableId": 9,
+      "title": "Machine Learning Engineer",
+      "company": "AI Forge",
+      "location": "Bangalore",
+      "skills": [
+        "Python",
+        "TensorFlow",
+        "Scikit-learn"
+      ],
+      "salary": "14 LPA",
+      "postedAt": "2026-02-07"
+    }
+  ]
+}

@@ -1,0 +1,101 @@
+[
+  {
+    "availableId": 1,
+    "title": "Frontend Developer Intern",
+    "company": "TechNova",
+    "location": "Remote",
+    "skills": ["HTML", "CSS", "JavaScript", "React"],
+    "salary": "15,000/month",
+    "postedAt": "2026-01-28"
+  },
+  {
+    "availableId": 2,
+    "title": "Backend Developer",
+    "company": "CodeCraft Labs",
+    "location": "Bangalore",
+    "skills": ["Node.js", "Express", "MongoDB"],
+    "salary": "8 LPA",
+    "postedAt": "2026-01-30"
+  },
+  {
+    "availableId": 3,
+    "title": "Full Stack Developer",
+    "company": "DevSphere",
+    "location": "Hyderabad",
+    "skills": ["React", "Node.js", "PostgreSQL"],
+    "salary": "10 LPA",
+    "postedAt": "2026-02-01"
+  },
+  {
+    "availableId": 4,
+    "title": "Software Engineer Intern",
+    "company": "InnoSoft",
+    "location": "Pune",
+    "skills": ["C++", "DSA", "OOP"],
+    "salary": "20,000/month",
+    "postedAt": "2026-02-02"
+  },
+  {
+    "availableId": 5,
+    "title": "Data Analyst",
+    "company": "InsightWorks",
+    "location": "Remote",
+    "skills": ["Python", "SQL", "Excel"],
+    "salary": "7 LPA",
+    "postedAt": "2026-02-03"
+  },
+  {
+    "availableId": 6,
+    "title": "Mobile App Developer",
+    "company": "Appify",
+    "location": "Chennai",
+    "skills": ["Flutter", "Dart", "Firebase"],
+    "salary": "9 LPA",
+    "postedAt": "2026-02-04"
+  },
+  {
+    "availableId": 7,
+    "title": "DevOps Engineer",
+    "company": "CloudNest",
+    "location": "Gurgaon",
+    "skills": ["Docker", "AWS", "CI/CD"],
+    "salary": "12 LPA",
+    "postedAt": "2026-02-05"
+  },
+  {
+    "availableId": 8,
+    "title": "UI/UX Designer",
+    "company": "PixelPerfect",
+    "location": "Remote",
+    "skills": ["Figma", "Wireframing", "Prototyping"],
+    "salary": "6 LPA",
+    "postedAt": "2026-02-06"
+  },
+  {
+    "availableId": 9,
+    "title": "Machine Learning Engineer",
+    "company": "AI Forge",
+    "location": "Bangalore",
+    "skills": ["Python", "TensorFlow", "Scikit-learn"],
+    "salary": "14 LPA",
+    "postedAt": "2026-02-07"
+  },
+  {
+    "availableId": 10,
+    "title": "Quality Assurance Engineer",
+    "company": "Testify",
+    "location": "Noida",
+    "skills": ["Manual Testing", "Selenium", "API Testing"],
+    "salary": "5.5 LPA",
+    "postedAt": "2026-02-08"
+  },
+  {
+    "availableId": 11,
+    "title": "Software Engineer",
+    "company": "Deutsche Bank",
+    "location": "Berlin",
+    "skills": ["DSA", "Development", "Finance"],
+    "salary": "72 LPA",
+    "postedAt": "2026-02-09"
+  }
+]

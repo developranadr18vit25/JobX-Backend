@@ -1,0 +1,81 @@
+{
+  "users": [
+    {
+      "Username": "Dhruv",
+      "Password": "2007",
+      "Userid": "1",
+      "Role": [
+        "User"
+      ]
+    },
+    {
+      "Username": "virat",
+      "Password": "18",
+      "Userid": "2",
+      "Role": [
+        "Editor"
+      ]
+    },
+    {
+      "Username": "rohit",
+      "Password": "45",
+      "Userid": "3",
+      "Role": [
+        "Admin"
+      ]
+    },
+    {
+      "Username": "Messi",
+      "Password": "$2b$10$kcSHnBqTIPsVdbp/ZB8EBOwlD7C8KVVpTjFvEzxEfROpe/mWTDw/G",
+      "Userid": "4",
+      "Role": [
+        "Admin"
+      ],
+      "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VyaWQiOiI0IiwiaWF0IjoxNzcwNjMyNTQxLCJleHAiOjE3NzA3MTg5NDF9.B_YfbBuQVKonBcKzKMnakpwmRFydqM1X-33UMvmXPg4"
+    }
+  ],
+  "jobs": [
+    {
+      "Userid": "1",
+      "Jobid": 1,
+      "Company": "Rakuten",
+      "Location": "Tokyo",
+      "Status": "Interview"
+    },
+    {
+      "Userid": "1",
+      "Jobid": 2,
+      "Company": "Deutsche Bank",
+      "Location": "Berlin",
+      "Status": "HR Round"
+    },
+    {
+      "Userid": "1",
+      "Jobid": "3",
+      "Company": "Amazon",
+      "Location": "Paris",
+      "Status": "Accepted"
+    },
+    {
+      "Userid": "2",
+      "Jobid": 1,
+      "Company": "Meta",
+      "Location": "London",
+      "Status": "Interview"
+    },
+    {
+      "Userid": "2",
+      "Jobid": 2,
+      "Company": "Apple",
+      "Location": "California",
+      "Status": "Accepted"
+    },
+    {
+      "Userid": "3",
+      "JobId": 1,
+      "Company": "DHL",
+      "Location": "Mumbai",
+      "Status": "Online Assessment"
+    }
+  ]
+}

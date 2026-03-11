@@ -5,6 +5,6 @@ const displayController=require("../controllers/displayController");
 const verify=require("../jwt/verification.js")
 
 router.route("/:id")
-    .get(verify.verifyJWT,displayController.handleDisplay)
+    .get(displayController.handleDisplay)
 
 module.exports=router;    

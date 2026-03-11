@@ -13,6 +13,7 @@ const mongoose=require("mongoose");
 const handleSignUp = ( async (req, res) => {
     const Username = req.body.Username;
     const Pwd = req.body.Password;
+    const purpose=req.body.Purpose;
 
     const newUser=mongoose.connection.collection("users");
 
@@ -32,19 +33,21 @@ const handleSignUp = ( async (req, res) => {
 
     const count= await newUser.countDocuments();
 
+    const latestUser=await newUser.findOne({},{sort:{UserId:-1}});
 
-    const prevUserId=count>0?newUser.findOne({Username:Username}).Userid:0;
+    const prevUserId=count>0?latestUser.UserId:0;
 
     // const prevUserId=userDB.content.users.length>0?userDB.content.users[userDB.content.users.length-1].Userid:0;
 
     // const otherUsers = userDB.content.users.filter((person) => person.Username !== Username);
-    const currentUser = {
-        "Username": req.body.Username,
-        "Password": hashedPwd,
-        "Userid":(Number(prevUserId)+1).toString()
-    }
+    // const currentUser = {
+    //     "Username": req.body.Username,
+    //     "Password": hashedPwd,
+    //     "Userid":(Number(prevUserId)+1).toString(),
+    //     "Purpose":purpose
+    // }
 
-    await newUser.insertOne({Username:Username , Password:hashedPwd , UserId:prevUserId+1});
+    await newUser.insertOne({Username:Username , Password:hashedPwd , UserId:prevUserId+1 , Purpose:purpose});
 
     // fsPromises.writeFile(path.join(__dirname, "..", "model", "usersDB.json"), JSON.stringify(userDB.content, null, 2));
 

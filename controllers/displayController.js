@@ -3,11 +3,17 @@ const userDB={
 }
 
 const path=require("path");
+const mongoose=require("mongoose");
 
-const handleDisplay=((req,res)=>{
-    const id=req.params.id;
+const handleDisplay=(async(req,res)=>{
+    const id=Number(req.params.id);
 
-    res.json(userDB.content.jobs.filter((person)=>person.Userid==id));
+
+    const currUser=mongoose.connection.collection("users");
+
+    const data= await currUser.findOne({UserId:id});
+
+    res.json(data);
 })
 
 module.exports={handleDisplay};

@@ -5,7 +5,7 @@ const applicationController = require("../controllers/applicationController");
 const verification=require("../jwt/verification");
 
 
-router.route("/applied/:id/:availableid")
-    .post(verification.verifyJWT,applicationController.handleApplication)
+router.route("/posted")
+    .post(applicationController.handleApplication)
 
 module.exports = router;

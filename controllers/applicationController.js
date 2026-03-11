@@ -1,48 +1,33 @@
-const appliedDB = {
-    data: require("../model/appliedJobs.json")
-}
+// const appliedDB = {
+//     data: require("../model/appliedJobs.json")
+// }
 
-const jobsDB = {
-    jobs: require("../model/newJobs.json")
-}
+// const jobsDB = {
+//     jobs: require("../model/newJobs.json")
+// }
 
 const path = require("path");
 const fsPromises = require("fs").promises;
+const mongoose=require("mongoose");
 
 const handleApplication = (async (req, res) => {
-    const currentUser = req.params.id;
-    const currentJobId = Number(req.params.availableid);
+    const company=req.body.Company;
+    const title=req.body.Title;
+    const location=req.body.Location;
+    const salary=req.body.Salary;
 
-    const duplicate = appliedDB.data.jobs.find((person) => (person.userId == currentUser && person.availableId == currentJobId));
+    const newJob=mongoose.connection.collection("availableJobs");
+    const count=await newJob.countDocuments();
 
-    if (duplicate) {
-        return res.json({
-            message: "Job already applied"
-        })
-    }
+    const latestJob=await newJob.findOne({} , {sort:{JobId:-1}});
 
-    const currentJob = jobsDB.jobs.find((person) => person.availableId == currentJobId);
+    const lastJobId=count>0?latestJob.JobId:0;
 
-    const appliedJob = {
-        "userId": currentUser.toString(),
-        "availableId": currentJob.availableId,
-        "title": currentJob.title,
-        "company": currentJob.company,
-        "location": currentJob.location,
-        "skills": currentJob.skills,
-        "salary": currentJob.salary,
-        "postedAt": currentJob.postedAt
-    }
-
-    appliedDB.data.jobs.push(appliedJob);
-
-    await fsPromises.writeFile(path.join(__dirname, "..", "model", "appliedJobs.json"), JSON.stringify(appliedDB.data, null, 2));
+    await newJob.insertOne({JobId:lastJobId+1 , Company:company , Title:title,  Location:location , Salary:salary});
 
     res.json({
-        message: "Applied Successfully"
+        message: "Job Posted Successfully"
     })
-
-
 
 })
 

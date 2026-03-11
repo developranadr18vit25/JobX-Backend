@@ -5,6 +5,6 @@ const loginController=require("../controllers/loginController.js");
 
 
 router.route("/oldUser")
-    .get(loginController.handleLogin)
+    .post(loginController.handleLogin)
 
 module.exports=router;

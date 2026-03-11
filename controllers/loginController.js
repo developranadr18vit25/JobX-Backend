@@ -1,9 +1,9 @@
-const userDB={
-    content:require("../model/usersDB"),
-    setRefreshToken:function(data){
-        this.content.users=data;
-    }
-}
+// const userDB={
+//     content:require("../model/usersDB"),
+//     setRefreshToken:function(data){
+//         this.content.users=data;
+//     }
+// }
 
 const path=require("path");
 const jwt=require("jsonwebtoken");
@@ -11,6 +11,7 @@ require("dotenv").config();
 const bcrypt=require("bcrypt");
 const { hash } = require("crypto");
 const fsPromises=require("fs").promises;
+const mongoose=require("mongoose");
 
 const handleLogin=(async(req,res)=>{
     const Username=req.body.Username;
@@ -22,8 +23,9 @@ const handleLogin=(async(req,res)=>{
         })
     }
 
-    const UsernameMatch=userDB.content.users.find((person)=>person.Username==Username);
-    const PwdMatch=await bcrypt.compare(Pwd,UsernameMatch.Password);
+    const oldUser=mongoose.connection.collection("users");
+
+    const UsernameMatch=await oldUser.findOne({Username:Username});
 
     if(!UsernameMatch){
          return res.json({
@@ -31,22 +33,22 @@ const handleLogin=(async(req,res)=>{
         })
     }
 
+    const PwdMatch=await bcrypt.compare(Pwd,UsernameMatch.Password);
+
     if(!PwdMatch){
         return res.json({
             message:"Incorrect Password"
         })
     }
 
-    const otherUsers=userDB.content.users.filter((person)=>person.Username!=Username);
-
     const accessToken=jwt.sign(
-        {"UserId":UsernameMatch.Userid},
+        {"UserId":UsernameMatch.UserId},
         process.env.ACCESS_TOKEN_SECRET,
         {expiresIn:'1h'}
     );
 
     const refreshToken=jwt.sign(
-        {"Userid":UsernameMatch.Userid},
+        {"Userid":UsernameMatch.UserId},
         process.env.REFRESH_TOKEN_SECRET,
         {expiresIn:'1d'}
     )
@@ -58,11 +60,7 @@ const handleLogin=(async(req,res)=>{
         maxAge: 24 * 60 * 60 * 1000
     })
 
-    const currentUser={...UsernameMatch,refreshToken};
-
-    userDB.setRefreshToken([...otherUsers,currentUser]);
-
-    fsPromises.writeFile(path.join(__dirname,"..","model","usersDB.json"), JSON.stringify(userDB.content, null , 2));
+    await oldUser.updateOne({Username:Username} , {$set:{refreshToken:refreshToken}});
 
     res.json(accessToken);
 })

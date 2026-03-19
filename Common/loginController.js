@@ -1,9 +1,4 @@
-// const userDB={
-//     content:require("../model/usersDB"),
-//     setRefreshToken:function(data){
-//         this.content.users=data;
-//     }
-// }
+
 
 const path=require("path");
 const jwt=require("jsonwebtoken");
@@ -12,6 +7,7 @@ const bcrypt=require("bcrypt");
 const { hash } = require("crypto");
 const fsPromises=require("fs").promises;
 const mongoose=require("mongoose");
+const {currUser}=require("../model/schemas")
 
 const handleLogin=(async(req,res)=>{
     const Username=req.body.Username;
@@ -23,9 +19,7 @@ const handleLogin=(async(req,res)=>{
         })
     }
 
-    const oldUser=mongoose.connection.collection("users");
-
-    const UsernameMatch=await oldUser.findOne({Username:Username});
+    const UsernameMatch=await currUser.findOne({Username:Username});
 
     if(!UsernameMatch){
          return res.json({
@@ -60,7 +54,7 @@ const handleLogin=(async(req,res)=>{
         maxAge: 24 * 60 * 60 * 1000
     })
 
-    await oldUser.updateOne({Username:Username} , {$set:{refreshToken:refreshToken}});
+    await currUser.updateOne({Username:Username} , {$set:{refreshToken:refreshToken}});
 
     res.json(accessToken);
 })

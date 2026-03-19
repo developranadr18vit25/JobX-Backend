@@ -5,17 +5,18 @@ const path=require("path");
 const connectDB=require("./model/connect.js");
 const fs=require("fs");
 require("dotenv").config();
-const signUpRouter=require("./routes/signUp.js");
-const loginRouter=require("./routes/Login.js");
+const signUpRouter=require("./routes/signUp.js"); // done
+const loginRouter=require("./routes/Login.js"); // done
 const displayRouter=require("./routes/display.js");
-const applyRouter=require("./routes/appliedJobs.js");
-const updateRouter=require("./routes/update.js")
+const applyRouter=require("./routes/appliedJobs.js"); // done
 const searchRouter=require("./routes/search.js");
 const adminViewRouter=require("./routes/adminView.js");
 const findJobsRouter=require("./routes/findJobs.js");
-const jobApplicationRouter=require("./routes/availableJobs.js");
+const resetPwdRouter=require("./routes/resetPwd.js"); //done
+const jobApplicationRouter=require("./routes/availableJobs.js"); //done
 const cookieParser=require("cookie-parser");
 const refreshRouter=require("./routes/refresh.js");
+const changePersonalDataRouter=require("./routes/changePersonalData.js") //done
 
 app.use(express.json());
 app.use(cookieParser());
@@ -26,16 +27,18 @@ app.get("/",(req,res)=>{
     res.send("express is working ")
 })
 
-app.use("/signUp", signUpRouter);
-app.use("/login", loginRouter);
+app.use("/signUp", signUpRouter); // done
+app.use("/login", loginRouter); //done
 app.use("/display", displayRouter);
 app.use("/apply",applyRouter);
-app.use("/update",updateRouter);
 app.use("/search", searchRouter);
 app.use("/admin", adminViewRouter);
 app.use("/new", findJobsRouter);
-app.use("/application", jobApplicationRouter);
+app.use("/application", jobApplicationRouter); //done
 app.use("/refresh" , refreshRouter);
+app.use("/reset" , resetPwdRouter); //done
+app.use("/account", changePersonalDataRouter); //done
+
 
 
  

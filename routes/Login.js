@@ -1,7 +1,7 @@
 const path=require("path");
 const express=require("express");
 const router=express.Router();
-const loginController=require("../controllers/loginController.js");
+const loginController=require("../Common/loginController.js");
 
 
 router.route("/oldUser")

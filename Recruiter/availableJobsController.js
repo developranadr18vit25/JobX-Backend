@@ -11,7 +11,7 @@ const handleApplication = (async (req, res) => {
 
     const count=await newJobs.countDocuments();
 
-    const latestJob=await newJobs.findOne({} , {sort:{JobId:-1}});
+    const latestJob=await newJobs.findOne().sort({JobId:-1});
 
     const lastJobId=count>0?latestJob.JobId:0;
 
@@ -20,7 +20,6 @@ const handleApplication = (async (req, res) => {
     res.json({
         message: "Job Posted Successfully"
     })
-
 })
 
 module.exports = { handleApplication };

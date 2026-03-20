@@ -17,14 +17,14 @@ const newJobsSchema= new mongoose.Schema({
     Salary:String
 })
 
-const newJobs=mongoose.model("availableJobs", newJobsSchema);
+const newJobs=mongoose.model("availableJobs", newJobsSchema , "availableJobs");
 
 const appliedJobsSchema= new mongoose.Schema({
-    JobId:String,
+    JobId:Number,
     UserId:Number
 })
 
-const appliedJobs=mongoose.model("appliedJobs", appliedJobsSchema);
+const appliedJobs=mongoose.model("appliedJobs", appliedJobsSchema , "appliedJobs");
 
 
 module.exports={currUser,newJobs,appliedJobs}

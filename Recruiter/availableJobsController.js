@@ -8,6 +8,8 @@ const handleApplication = (async (req, res) => {
     const title=req.body.Title;
     const location=req.body.Location;
     const salary=req.body.Salary;
+    const jobtype=req.body.JobType;
+    const experience=req.body.Experience
 
     const count=await newJobs.countDocuments();
 
@@ -15,7 +17,7 @@ const handleApplication = (async (req, res) => {
 
     const lastJobId=count>0?latestJob.JobId:0;
 
-    await newJobs.insertOne({JobId:lastJobId+1 , Company:company , Title:title,  Location:location , Salary:salary});
+    await newJobs.insertOne({JobId:lastJobId+1 , Company:company , Title:title,  Location:location , Salary:salary , JobType:jobtype , Experience:experience});
 
     res.json({
         message: "Job Posted Successfully"

@@ -14,7 +14,9 @@ const newJobsSchema= new mongoose.Schema({
     Company:String,
     Title:String,
     Location:String,
-    Salary:String
+    Salary:Number,
+    JobType:String,
+    Experience:Number
 })
 
 const newJobs=mongoose.model("availableJobs", newJobsSchema , "availableJobs");

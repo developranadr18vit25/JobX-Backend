@@ -8,4 +8,8 @@ const verifyRoles=require("../roles/verifyRoles");
 router.route("/newJob")
     .post(verification.verifyJWT,applyController.handleApply); 
 
+router.route("/:jobid/applicants")
+    .get(verification.verifyJWT, applyController.handleApplicants)
+    
+
 module.exports=router;    

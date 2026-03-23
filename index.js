@@ -17,6 +17,7 @@ const jobApplicationRouter=require("./routes/availableJobs.js"); //done
 const cookieParser=require("cookie-parser");
 const refreshRouter=require("./routes/refresh.js");
 const changePersonalDataRouter=require("./routes/changePersonalData.js") //done
+const userProfileRouter=require("./routes/userProfile.js");
 
 app.use(express.json());
 app.use(cookieParser());
@@ -38,6 +39,7 @@ app.use("/application", jobApplicationRouter); //done
 app.use("/refresh" , refreshRouter);
 app.use("/reset" , resetPwdRouter); //done
 app.use("/account", changePersonalDataRouter); //done
+app.use("/my" , userProfileRouter);
 
 
 

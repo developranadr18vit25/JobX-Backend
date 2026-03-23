@@ -27,6 +27,10 @@ function buildQuery(params) {
         query.Salary = { $lte: Number(params.maxSalary)};
     }
 
+    if(params.yearsOfExp){
+        query.Experience={$regex: params.yearsOfExp}
+    }
+
     return query;
 }
 

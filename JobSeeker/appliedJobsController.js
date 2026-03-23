@@ -4,7 +4,7 @@ const mongoose=require("mongoose");
 const jwt=require("jsonwebtoken");
 const { config } = require("dotenv");
 require("dotenv").config();
-const {appliedJobs}=require("../model/schemas");
+const {appliedJobs , userProfile}=require("../model/schemas");
 
 const handleApply = (async(req, res) => {
     const token=req.headers.authorization.split(" ")[1];
@@ -17,7 +17,17 @@ const handleApply = (async(req, res) => {
     return res.json({
         message:"Job applied Successfully"
     });
-
 })
 
-module.exports={handleApply}
+const handleApplicants=(async(req,res)=>{
+    const jobid=req.params.jobid;
+
+    const applicants=await appliedJobs.find({JobId:jobid});
+    const userids=applicants.map(e=>e.UserId);
+
+    const detailOfApplicant= await userProfile.find({UserId:{$in:userids}});
+
+    return res.json(detailOfApplicant);
+})
+
+module.exports={handleApply , handleApplicants}

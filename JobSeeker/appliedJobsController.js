@@ -12,7 +12,7 @@ const handleApply = (async(req, res) => {
     const userId=decoded.UserId;   
     const jobId=Number(req.body.JobId);
 
-    await appliedJobs.insertOne({JobId:jobId , UserId:userId});
+    await appliedJobs.create({JobId:jobId , UserId:userId , Status:"Pending"});
 
     return res.json({
         message:"Job applied Successfully"

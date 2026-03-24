@@ -42,7 +42,7 @@ const handleLogin=(async(req,res)=>{
     );
 
     const refreshToken=jwt.sign(
-        {"Userid":UsernameMatch.UserId},
+        {"UserId":UsernameMatch.UserId},
         process.env.REFRESH_TOKEN_SECRET,
         {expiresIn:'1d'}
     )

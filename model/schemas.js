@@ -23,7 +23,8 @@ const newJobs = mongoose.model("availableJobs", newJobsSchema, "availableJobs");
 
 const appliedJobsSchema = new mongoose.Schema({
     JobId: Number,
-    UserId: Number
+    UserId: Number,
+    Status:String
 })
 
 const appliedJobs = mongoose.model("appliedJobs", appliedJobsSchema, "appliedJobs");

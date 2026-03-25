@@ -25,7 +25,7 @@ const handleSignUp = ( async (req, res) => {
 
     const count= await currUser.countDocuments();
 
-    const latestUser=await currUser.findOne({},{sort:{UserId:-1}});
+    const latestUser = await currUser.findOne().sort({ UserId: -1 });
 
     const prevUserId=count>0?latestUser.UserId:0;
 

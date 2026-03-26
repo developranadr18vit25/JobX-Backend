@@ -20,14 +20,29 @@ const handleApply = (async(req, res) => {
 })
 
 const handleApplicants=(async(req,res)=>{
-    const jobid=req.params.jobid;
+    const jobid=Number(req.params.jobid);
+    const {status}=req.query;
+    let filter={JobId:jobid};
 
-    const applicants=await appliedJobs.find({JobId:jobid});
+    if(status){
+        filter.Status=status;
+    }
+    const applicants=await appliedJobs.find(filter);
+
     const userids=applicants.map(e=>e.UserId);
+    const statusMap=new Map();
+    applicants.forEach(a=>{
+        statusMap.set(a.UserId, a.Status)
+    })
 
     const detailOfApplicant= await userProfile.find({UserId:{$in:userids}});
 
-    return res.json(detailOfApplicant);
+    const result=detailOfApplicant.map(user=>({
+        ...user.toObject(),
+        Status:statusMap.get(user.UserId)
+    }))
+
+    return res.json(result);
 })
 
 module.exports={handleApply , handleApplicants}

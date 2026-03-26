@@ -12,7 +12,10 @@ router.route("/newJob") // APPLY FOR A JOB
 router.route("/:jobid/applicants")  // RECRUITER VIEWS APPLICANT FOR RESPECTIVE JOB 
     .get(verification.verifyJWT,applyController.handleApplicants)
 
-router.route("/:jobid/applicants/:userid/status")
+router.route("/:jobid/applicants/:userid/status") // RECRUITER CAN CHANGE THE STATUS OF THE APPLICANT
     .put(verification.verifyJWT,updateStatusController.handleUpdateStatus)
+
+router.route("/:jobid/applicants/withdrawn")
+    .put(verification.verifyJWT, updateStatusController.handleWithdrawApplication)
 
 module.exports=router;    

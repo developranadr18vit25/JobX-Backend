@@ -22,4 +22,15 @@ const handleUpdateStatus=(async(req,res)=>{
     }
 })
 
-module.exports={handleUpdateStatus}
+const handleWithdrawApplication=(async(req,res)=>{
+    const jobid=req.params.jobid;
+    const userid=req.user.UserId;
+
+    await appliedJobs.updateOne({JobId:jobid , UserId:userid} , {$set:{Status:"Withdrawn"}});
+
+    res.json({
+        message:"Job Withdrawn Successfully"
+    })
+})
+
+module.exports={handleUpdateStatus , handleWithdrawApplication}

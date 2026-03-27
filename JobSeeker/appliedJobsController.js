@@ -12,6 +12,14 @@ const handleApply = (async(req, res) => {
     const userId=decoded.UserId;   
     const jobId=Number(req.body.JobId);
 
+    const duplicate=appliedJobs.find({JobId:jobId , UserId:userId});
+
+    if(duplicate){
+        res.status(409).json({
+            message:"Job already applied"
+        })
+    }
+
     await appliedJobs.create({JobId:jobId , UserId:userId , Status:"Pending"});
 
     return res.json({

@@ -17,11 +17,30 @@ const handleApplication = (async (req, res) => {
 
     const lastJobId=count>0?latestJob.JobId:0;
 
-    await newJobs.insertOne({JobId:lastJobId+1 , Company:company , Title:title,  Location:location , Salary:salary , JobType:jobtype , Experience:experience});
+    const duplicate=await newJobs.findOne({Title:title , Company:company , Location:location });
+
+    if(duplicate){
+        res.status(409).json({
+            message:"Job already exists"
+        })
+    }
+
+    await newJobs.insertOne({JobId:lastJobId+1 , Company:company , Title:title,  Location:location , Salary:salary , JobType:jobtype , Experience:experience , Status:"Active"});
 
     res.json({
         message: "Job Posted Successfully"
     })
 })
 
-module.exports = { handleApplication };
+const handleDeletion=(async(req,res)=>{
+    const status=req.body.Status;
+    const jobid=req.params.JobId;
+
+    await newJobs.updateOne({JobId:jobid} , {$set:{Status:status}});
+
+    res.json({
+        message:"Job status updated Successfully"
+    })
+})
+
+module.exports = { handleApplication , handleDeletion };

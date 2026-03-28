@@ -22,7 +22,7 @@ const handleLogin=(async(req,res)=>{
     const UsernameMatch=await currUser.findOne({Username:Username});
 
     if(!UsernameMatch){
-         return res.json({
+         return res.status(404).json({
             message:"User doesn't exist"
         })
     }
@@ -30,7 +30,7 @@ const handleLogin=(async(req,res)=>{
     const PwdMatch=await bcrypt.compare(Pwd,UsernameMatch.Password);
 
     if(!PwdMatch){
-        return res.json({
+        return res.status(401).json({
             message:"Incorrect Password"
         })
     }
@@ -56,7 +56,7 @@ const handleLogin=(async(req,res)=>{
 
     await currUser.updateOne({Username:Username} , {$set:{refreshToken:refreshToken}});
 
-    res.json(accessToken);
+    res.status(200).json(accessToken);
 })
 
 module.exports={handleLogin};

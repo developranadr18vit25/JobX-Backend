@@ -10,7 +10,6 @@ const loginRouter=require("./routes/Login.js"); // done
 const displayRouter=require("./routes/display.js");
 const applyRouter=require("./routes/appliedJobs.js"); // done
 const searchRouter=require("./routes/search.js");
-const adminViewRouter=require("./routes/adminView.js");
 const findJobsRouter=require("./routes/findJobs.js");
 const resetPwdRouter=require("./routes/resetPwd.js"); //done
 const jobApplicationRouter=require("./routes/availableJobs.js"); //done
@@ -33,7 +32,6 @@ app.use("/login", loginRouter); //done
 app.use("/display", displayRouter);
 app.use("/apply",applyRouter);
 app.use("/search", searchRouter);
-app.use("/admin", adminViewRouter);
 app.use("/new", findJobsRouter);
 app.use("/application", jobApplicationRouter); //done
 app.use("/refresh" , refreshRouter);

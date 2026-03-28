@@ -11,12 +11,12 @@ const handleUpdateStatus=(async(req,res)=>{
     const result = await appliedJobs.updateOne({UserId:userid,JobId:jobid} , {$set:{Status:status}});
 
     if(status=="Shortlisted"){
-        return res.json({
+        return res.status(200).json({
             meesage:"Applicant Shortlisted"
         })
     }
     else{
-        return res.json({
+        return res.status(200).json({
             message:"Applicant Rejected"
         })
     }
@@ -28,7 +28,7 @@ const handleWithdrawApplication=(async(req,res)=>{
 
     await appliedJobs.updateOne({JobId:jobid , UserId:userid} , {$set:{Status:"Withdrawn"}});
 
-    res.json({
+    res.status(200).json({
         message:"Job Withdrawn Successfully"
     })
 })

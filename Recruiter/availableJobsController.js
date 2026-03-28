@@ -9,7 +9,7 @@ const handleApplication = (async (req, res) => {
     const location=req.body.Location;
     const salary=req.body.Salary;
     const jobtype=req.body.JobType;
-    const experience=req.body.Experience
+    const experience=req.body.Experience;
 
     const count=await newJobs.countDocuments();
 
@@ -20,14 +20,14 @@ const handleApplication = (async (req, res) => {
     const duplicate=await newJobs.findOne({Title:title , Company:company , Location:location });
 
     if(duplicate){
-        res.status(409).json({
+        return res.status(409).json({
             message:"Job already exists"
         })
     }
 
     await newJobs.insertOne({JobId:lastJobId+1 , Company:company , Title:title,  Location:location , Salary:salary , JobType:jobtype , Experience:experience , Status:"Active"});
 
-    res.json({
+    res.status(201).json({
         message: "Job Posted Successfully"
     })
 })
@@ -38,7 +38,7 @@ const handleDeletion=(async(req,res)=>{
 
     await newJobs.updateOne({JobId:jobid} , {$set:{Status:status}});
 
-    res.json({
+    res.status(200).json({
         message:"Job status updated Successfully"
     })
 })

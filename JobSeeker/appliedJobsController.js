@@ -15,14 +15,14 @@ const handleApply = (async(req, res) => {
     const duplicate=appliedJobs.find({JobId:jobId , UserId:userId});
 
     if(duplicate){
-        res.status(409).json({
+        return res.status(409).json({
             message:"Job already applied"
         })
     }
 
     await appliedJobs.create({JobId:jobId , UserId:userId , Status:"Pending"});
 
-    return res.json({
+    return res.status(401).json({
         message:"Job applied Successfully"
     });
 })
@@ -30,12 +30,15 @@ const handleApply = (async(req, res) => {
 const handleApplicants=(async(req,res)=>{
     const jobid=Number(req.params.jobid);
     const {status}=req.query;
+    const page=Number(req.query.page)||1;
+    const limit=Number(req.query.limit)||10;
     let filter={JobId:jobid};
+    const skip=(page-1)*limit;
 
     if(status){
         filter.Status=status;
     }
-    const applicants=await appliedJobs.find(filter);
+    const applicants=await appliedJobs.find(filter).skip(skip).limit(limit);
 
     const userids=applicants.map(e=>e.UserId);
     const statusMap=new Map();

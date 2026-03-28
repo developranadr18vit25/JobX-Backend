@@ -11,7 +11,7 @@ router.route("/posted") // RECRUITER CAN POST A JOB OPENING
 router.route("/update/:JobId") // RECRUITER CAN UPDATE THE DETAILS REGARDING THE JOB OPENING 
     .put(verification.verifyJWT,updateJobsController.handleJobUpdate);
 
-router.route("/status/:JobId")
+router.route("/status/:JobId") // RECRUITER CAN CHANGE THE STATUS OF THE JOB 
     .put(verification.verifyJWT,availableJobsController.handleDeletion);
 
 module.exports = router;

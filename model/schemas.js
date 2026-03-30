@@ -47,6 +47,7 @@ const userProfileSchema = new mongoose.Schema({
 })
 
 const userProfile = mongoose.model("userProfile", userProfileSchema, "userProfile");
+userProfileSchema.index({Name:"text", Skills:"text" });
 
 
 module.exports = { currUser, newJobs, appliedJobs, userProfile }

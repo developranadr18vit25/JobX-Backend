@@ -5,6 +5,7 @@ const jwt=require("jsonwebtoken");
 const { config } = require("dotenv");
 require("dotenv").config();
 const {appliedJobs , userProfile}=require("../model/schemas");
+const buildFilter=require("../utils/buildFilter");
 
 const handleApply = (async(req, res) => {
     const token=req.headers.authorization.split(" ")[1];
@@ -28,16 +29,16 @@ const handleApply = (async(req, res) => {
 })
 
 const handleApplicants=(async(req,res)=>{
+
     const jobid=Number(req.params.jobid);
-    const {status}=req.query;
     const page=Number(req.query.page)||1;
     const limit=Number(req.query.limit)||10;
-    let filter={JobId:jobid};
     const skip=(page-1)*limit;
+    const {minExperience,maxExperience, status, keyword}=req.query;
+    let filter={JobId:jobid};
 
-    if(status){
-        filter.Status=status;
-    }
+    filter=buildFilter(req.query , filter);
+
     const applicants=await appliedJobs.find(filter).skip(skip).limit(limit);
 
     const userids=applicants.map(e=>e.UserId);

@@ -15,7 +15,7 @@ router.route("/:jobid/applicants")  // RECRUITER VIEWS APPLICANT FOR RESPECTIVE 
 router.route("/:jobid/applicants/:userid/status") // RECRUITER CAN CHANGE THE STATUS OF THE APPLICANT
     .put(verification.verifyJWT,updateStatusController.handleUpdateStatus)
 
-router.route("/:jobid/applicants/withdrawn") // APPLICANT CAN WITHDRAW HIS APPLICATION BUT CHANGING STATUS IN THE DB TO WITHDRAWN 
+router.route("/:jobid/applicants/withdrawn") // APPLICANT CAN WITHDRAW HIS APPLICATION BY CHANGING STATUS IN THE DB TO WITHDRAWN 
     .put(verification.verifyJWT, updateStatusController.handleWithdrawApplication)
 
 

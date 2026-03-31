@@ -35,11 +35,10 @@ const handleApplicants=(async(req,res)=>{
     const limit=Number(req.query.limit)||10;
     const skip=(page-1)*limit;
     const {minExperience,maxExperience, status, keyword}=req.query;
-    let filter={JobId:jobid};
 
-    filter=buildFilter(req.query , filter);
+    let filter=buildFilter(req.query);
 
-    const applicants=await appliedJobs.find(filter).skip(skip).limit(limit);
+    const applicants=await appliedJobs.find({JobId:jobid , ...filter}).skip(skip).limit(limit);
 
     const userids=applicants.map(e=>e.UserId);
     const statusMap=new Map();
@@ -47,7 +46,11 @@ const handleApplicants=(async(req,res)=>{
         statusMap.set(a.UserId, a.Status)
     })
 
-    const detailOfApplicant= await userProfile.find({UserId:{$in:userids}});
+    if("Status" in filter){
+        filter={};
+    }
+
+    const detailOfApplicant= await userProfile.find({UserId:{$in:userids} , ...filter});
 
     const result=detailOfApplicant.map(user=>({
         ...user.toObject(),

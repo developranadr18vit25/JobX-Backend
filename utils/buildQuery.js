@@ -31,6 +31,10 @@ function buildQuery(params) {
         query.Experience={$regex: params.yearsOfExp}
     }
 
+    if(params.status){
+        query.Status={$regex:params.status}
+    }
+
     return query;
 }
 

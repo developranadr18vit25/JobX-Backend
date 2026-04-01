@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const path = require("path");
 const availableJobsController = require("../Recruiter/availableJobsController");
-const verification=require("../jwt/verification");
+const verification=require("../middleware/authentication");
 const updateJobsController=require("../controllers/updateJobsController")
 
 router.route("/posted") // RECRUITER CAN POST A JOB OPENING

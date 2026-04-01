@@ -3,11 +3,12 @@ const express=require("express");
 const router=express.Router();
 const applyController=require("../JobSeeker/appliedJobsController");
 const updateStatusController=require("../Recruiter/updateStatusController")
-const verification=require("../jwt/verification");
+const verification=require("../middleware/authentication");
 const verifyRoles=require("../roles/verifyRoles");
+const authorization=require("../middleware/authorization")
 
 router.route("/newJob") //  USER APPLY FOR A JOB
-    .post(verification.verifyJWT,applyController.handleApply); 
+    .post(verification.verifyJWT, authorization.handleAuthorization("Applicant"), applyController.handleApply); 
 
 router.route("/:jobid/applicants")  // RECRUITER VIEWS APPLICANT FOR RESPECTIVE JOB 
     .get(verification.verifyJWT,applyController.handleApplicants)

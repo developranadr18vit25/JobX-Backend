@@ -7,7 +7,7 @@ const {currUser}=require("../model/schemas");
 const handleSignUp = ( async (req, res) => {
     const Username = req.body.Username;
     const Pwd = req.body.Password;
-    const purpose=req.body.Purpose;
+    const role="Applicant";
 
     if (!Username || !Pwd) {
         res.json({ Message: "Both Username and Password are required" });
@@ -29,7 +29,7 @@ const handleSignUp = ( async (req, res) => {
 
     const prevUserId=count>0?latestUser.UserId:0;
 
-    await currUser.insertOne({Username:Username , Password:hashedPwd , UserId:prevUserId+1 , Purpose:purpose});
+    await currUser.insertOne({Username:Username , Password:hashedPwd , UserId:prevUserId+1 , Role:role});
 
 
     res.json({ msg: "User created" });

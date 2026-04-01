@@ -1,7 +1,7 @@
 const express=require("express");
 const router=express.Router();
 const changePersonalController=require("../Common/changePersonalController");
-const verification=require("../jwt/verification");
+const verification=require("../middleware/authentication");
 
 
 router.route("/update")

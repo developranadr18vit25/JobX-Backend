@@ -1,5 +1,3 @@
-
-
 const path=require("path");
 const jwt=require("jsonwebtoken");
 require("dotenv").config();
@@ -36,13 +34,13 @@ const handleLogin=(async(req,res)=>{
     }
 
     const accessToken=jwt.sign(
-        {"UserId":UsernameMatch.UserId},
+        {"UserId":UsernameMatch.UserId , "Roles":UsernameMatch.Roles},
         process.env.ACCESS_TOKEN_SECRET,
         {expiresIn:'1h'}
     );
 
     const refreshToken=jwt.sign(
-        {"UserId":UsernameMatch.UserId},
+        {"UserId":UsernameMatch.UserId , "Roles":UsernameMatch.Roles},
         process.env.REFRESH_TOKEN_SECRET,
         {expiresIn:'1d'}
     )

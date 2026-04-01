@@ -1,5 +1,5 @@
 const mongoose=require("mongoose");
-const verification=require("../jwt/verification");
+const verification=require("../middleware/authentication");
 const {appliedJobs}=require("../model/schemas");
 
 

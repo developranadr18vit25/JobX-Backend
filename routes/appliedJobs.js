@@ -11,13 +11,13 @@ router.route("/newJob") //  USER APPLY FOR A JOB
     .post(verification.verifyJWT, authorization.handleAuthorization("Applicant"), applyController.handleApply); 
 
 router.route("/:jobid/applicants")  // RECRUITER VIEWS APPLICANT FOR RESPECTIVE JOB 
-    .get(verification.verifyJWT,applyController.handleApplicants)
+    .get(verification.verifyJWT, authorization.handleAuthorization("Recruiter"),applyController.handleApplicants)
 
 router.route("/:jobid/applicants/:userid/status") // RECRUITER CAN CHANGE THE STATUS OF THE APPLICANT
-    .put(verification.verifyJWT,updateStatusController.handleUpdateStatus)
+    .put(verification.verifyJWT, authorization.handleAuthorization("Recruiter"), updateStatusController.handleUpdateStatus)
 
 router.route("/:jobid/applicants/withdrawn") // APPLICANT CAN WITHDRAW HIS APPLICATION BY CHANGING STATUS IN THE DB TO WITHDRAWN 
-    .put(verification.verifyJWT, updateStatusController.handleWithdrawApplication)
+    .put(verification.verifyJWT, authorization.handleAuthorization("Applicant"), updateStatusController.handleWithdrawApplication)
 
 
 module.exports=router;    

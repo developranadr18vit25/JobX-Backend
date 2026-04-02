@@ -44,6 +44,10 @@ const handleLogin=(async(req,res)=>{
         process.env.REFRESH_TOKEN_SECRET,
         {expiresIn:'1d'}
     )
+
+    await currUser.updateOne({Username:Username} , {$set:{refreshToken:refreshToken}});
+
+    res.clearCookie("jwt");
     
     res.cookie("jwt",refreshToken,{
         httpOnly:true,
@@ -52,7 +56,6 @@ const handleLogin=(async(req,res)=>{
         maxAge: 24 * 60 * 60 * 1000
     })
 
-    await currUser.updateOne({Username:Username} , {$set:{refreshToken:refreshToken}});
 
     res.status(200).json(accessToken);
 })

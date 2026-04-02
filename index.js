@@ -9,8 +9,6 @@ const signUpRouter=require("./routes/signUp.js"); // done
 const loginRouter=require("./routes/Login.js"); // done
 const displayRouter=require("./routes/display.js");
 const applyRouter=require("./routes/appliedJobs.js"); // done
-const searchRouter=require("./routes/search.js");
-const findJobsRouter=require("./routes/findJobs.js");
 const resetPwdRouter=require("./routes/resetPwd.js"); //done
 const jobApplicationRouter=require("./routes/availableJobs.js"); //done
 const cookieParser=require("cookie-parser");
@@ -31,8 +29,6 @@ app.use("/signUp", signUpRouter); // done
 app.use("/login", loginRouter); //done
 app.use("/display", displayRouter);
 app.use("/apply",applyRouter);
-app.use("/search", searchRouter);
-app.use("/new", findJobsRouter);
 app.use("/application", jobApplicationRouter); //done
 app.use("/refresh" , refreshRouter);
 app.use("/reset" , resetPwdRouter); //done

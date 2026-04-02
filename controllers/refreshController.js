@@ -1,34 +1,32 @@
-const userDB={
-    content:require("../model/usersDB.json")
-}
-
-const path=require("path");
-const jwt=require("jsonwebtoken")
+const jwt=require("jsonwebtoken");
 require("dotenv").config();
+const mongoose=require("mongoose");
+const {currUser}=require("../model/schemas");
 
-const handleRefreshToken=((req,res)=>{
+const handleRefreshToken=(async(req,res,next)=>{
     const frontendRefreshToken=req.cookies.jwt;
 
-    if(!frontendRefreshToken) return res.sendStatus(401);
+    if(!frontendRefreshToken) return res.status(401).json("No refreshToken provided");
+    console.log(frontendRefreshToken);
 
-    const currentUser=userDB.content.users.find((person)=>person.refreshToken==frontendRefreshToken);
+    const currentUser=await currUser.findOne({refreshToken:frontendRefreshToken});
 
-    if(!currentUser) return res.sendStatus(403);
+    if(!currentUser) return res.status(403).json("No refreshToken match found");
 
     jwt.verify(
         frontendRefreshToken,
         process.env.REFRESH_TOKEN_SECRET,
         (err,decoded)=>{
-            if(err || decoded.Userid !== currentUser.Userid){
-                return res.sendStatus(403);
+
+            if(err){
+                return res.json("yoy");
             }
 
             const accessToken=jwt.sign(
-                {"UserId":decoded.Userid},
+                {"UserId":currentUser.UserId , "Roles":currentUser.Roles},
                 process.env.ACCESS_TOKEN_SECRET,
                 {expiresIn:"1h"}
             )
-
             res.json(accessToken);
         }
     )

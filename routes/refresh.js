@@ -5,6 +5,6 @@ const refreshController=require("../controllers/refreshController");
 
 
 router.route("/newToken")
-    .post(refreshController.handleRefreshToken)
+    .get(refreshController.handleRefreshToken)
 
 module.exports=router;    

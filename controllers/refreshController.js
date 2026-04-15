@@ -19,7 +19,7 @@ const handleRefreshToken=(async(req,res,next)=>{
         (err,decoded)=>{
 
             if(err){
-                return res.json("yoy");
+                return res.status(400).json("Error Occurred");
             }
 
             const accessToken=jwt.sign(

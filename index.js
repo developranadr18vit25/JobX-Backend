@@ -1,6 +1,10 @@
 const express=require("express");
 const app=express();
 
+const cors = require("cors");
+
+app.use(cors());
+
 const path=require("path");
 const connectDB=require("./model/connect.js");
 const fs=require("fs");

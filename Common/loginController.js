@@ -66,7 +66,6 @@ const handleLogin = (async (req, res) => {
     res.status(200).json({
         AccessToken:accessToken
     });
-    
     console.log("Login successful");
 })
 

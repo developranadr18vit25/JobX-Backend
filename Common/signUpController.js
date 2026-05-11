@@ -30,10 +30,10 @@ const handleSignUp = ( async (req, res) => {
 
     const prevUserId=count>0?latestUser.UserId:0;
 
-    await currUser.create({ Name:Name, Username:Username , Password:hashedPwd , UserId:prevUserId+1 , Role:role});
+    await currUser.create({ Name:Name, Username:Username , Password:hashedPwd , UserId:prevUserId+1 , Roles:role});
 
     console.log("Success")
-    return res.json({ msg: "User created" });
+    return res.status(200).json({ msg: "User created" });
 })
 
 module.exports = {handleSignUp};

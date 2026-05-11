@@ -17,7 +17,9 @@ const handleDisplayJobs = (async (req, res) => {
     if (mode == "available") {
 
         const allJobs = await newJobs.find(query).skip(skip).limit(limit);
-        return res.status(200).json(allJobs);
+        return res.status(200).json({
+            Jobs:allJobs
+        });
     }
     else {
         const applied = await appliedJobs.find({UserId:userid , ...query}).skip(skip).limit(limit);

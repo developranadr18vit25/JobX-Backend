@@ -1,6 +1,10 @@
 function buildQuery(params) {
     let query = {};
 
+    if(params.JobType){
+        query.JobType=params.JobType;
+    }
+
     if (params.title) {
 
         query.Title = { $regex: params.title };

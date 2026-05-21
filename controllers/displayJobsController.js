@@ -6,10 +6,10 @@ const buildQuery=require("../utils/buildQuery")
 const handleDisplayJobs = (async (req, res) => {
     const mode = req.body.Mode;
     const userid=req.user.UserId;
-    const { title, company, location , minSalary , maxSalary , yearsOfExp ,status } = req.query;
+    const { title, company, location , minSalary , maxSalary , yearsOfExp ,status , JobType } = req.query;
     const page=req.query.page||1;
     const limit=req.query.limit||10;
-
+ 
     const skip=(page-1)*limit;
 
     let query=buildQuery(req.query);

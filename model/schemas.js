@@ -10,6 +10,8 @@ const userSchema = new mongoose.Schema({
 })
 
 const currUser = mongoose.model("users", userSchema);
+userSchema.index({Username:1 , Password:1});
+
 
 const newJobsSchema = new mongoose.Schema({
     JobId: Number,

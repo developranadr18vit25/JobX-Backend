@@ -1,8 +1,8 @@
 function buildQuery(params) {
     let query = {};
 
-    if(params.JobType){
-        query.JobType=params.JobType;
+    if (params.JobType) {
+        query.JobType = params.JobType;
     }
 
     if (params.title) {
@@ -20,23 +20,35 @@ function buildQuery(params) {
     }
 
     if (params.minSalary && params.maxSalary) {
-        query.Salary = { $gte: Number(params.minSalary), $lte: Number(params.maxSalary)};
+        query.Salary = { $gte: Number(params.minSalary), $lte: Number(params.maxSalary) };
     }
 
     else if (params.minSalary) {
-        query.Salary = { $gte: Number(params.minSalary)};
+        query.Salary = { $gte: Number(params.minSalary) };
     }
 
-    else if(params.maxSalary) {
-        query.Salary = { $lte: Number(params.maxSalary)};
+    else if (params.maxSalary) {
+        query.Salary = { $lte: Number(params.maxSalary) };
     }
 
-    if(params.yearsOfExp){
-        query.Experience={$regex: params.yearsOfExp}
+    // if(params.minExp){
+    //     query.Experience={$gte: Number(params.minExp)};
+    // }
+
+    // if(params.maxExp){
+    //     query.Experience={$lte: Number(params.maxExp)};
+    // }
+
+    if (params.minExp && params.maxExp) {
+        query.Experience = { $gte: Number(params.minExp), $lte: Number(params.maxExp) };
     }
 
-    if(params.status){
-        query.Status={$regex:params.status}
+    else if (params.minExp) {
+        query.Experience = { $gte: Number(params.minExp) };
+    }
+
+    if (params.status) {
+        query.Status = { $regex: params.status }
     }
 
     return query;

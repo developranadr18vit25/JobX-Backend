@@ -10,6 +10,7 @@ const handleApplication = (async (req, res) => {
     const salary=req.body.Salary;
     const jobtype=req.body.JobType;
     const experience=req.body.Experience;
+    const skills=req.body.Skills;
 
     const count=await newJobs.countDocuments();
 
@@ -25,7 +26,7 @@ const handleApplication = (async (req, res) => {
         })
     }
 
-    await newJobs.insertOne({JobId:lastJobId+1 , Company:company , Title:title,  Location:location , Salary:salary , JobType:jobtype , Experience:experience , Status:"Active"});
+    await newJobs.insertOne({JobId:lastJobId+1 , Company:company , Title:title,  Location:location , Salary:salary , JobType:jobtype , Experience:experience , Skills: skills, Status:"Active"});
 
     res.status(201).json({
         message: "Job Posted Successfully"

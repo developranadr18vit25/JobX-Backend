@@ -21,10 +21,12 @@ const newJobsSchema = new mongoose.Schema({
     Salary: Number,
     JobType: String,
     Experience: Number,
+    Skills:[String],
     Status:String
 })
 
 const newJobs = mongoose.model("availableJobs", newJobsSchema, "availableJobs");
+newJobsSchema.index({Location:1 , JobType:1})
 
 const appliedJobsSchema = new mongoose.Schema({
     JobId: Number,

@@ -9,4 +9,7 @@ const verify=require("../middleware/authentication.js")
 router.route("/jobs") // USER CAN EITHER VIEW THE AVAILABLE JOBS OR THE APPLIED JOBS 
     .post(verification.verifyJWT,authorization.handleAuthorization("Recruiter","Applicant"), displayController.handleDisplayJobs)
 
+router.route("/jobs/:JobId")
+    .post(verification.verifyJWT , authorization.handleAuthorization("Recruiter","Applicant") , displayController.handleDetailJob)
+
 module.exports=router;    

@@ -6,7 +6,7 @@ const buildQuery=require("../utils/buildQuery")
 const handleDisplayJobs = (async (req, res) => {
     const mode = req.body.Mode;
     const userid=req.user.UserId;
-    const { title, company, location , minSalary , maxSalary , minExp , maxExp ,status , JobType } = req.query;
+    const { title, company, location , minSalary , maxSalary , minExp , maxExp ,status , JobType , skills } = req.query;
     const page=req.query.page||1;
     const limit=req.query.limit||10;
  
@@ -46,4 +46,17 @@ const handleDisplayJobs = (async (req, res) => {
 
 })
 
-module.exports = { handleDisplayJobs };
+
+const handleDetailJob=(async(req,res)=>{
+
+    const jobid=req.params.JobId;
+
+    const job=await newJobs.find({JobId:jobid});
+
+    return res.status(200).json({
+        Job:job
+    });
+
+})
+
+module.exports = { handleDisplayJobs , handleDetailJob };

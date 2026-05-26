@@ -11,6 +11,10 @@ function buildQuery(params) {
 
     }
 
+    if(params.skills){
+        query.Skills={$all:params.skills}
+    }
+
     if (params.company) {
         query.Company = { $regex: params.company };
     }

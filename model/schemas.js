@@ -22,6 +22,7 @@ const newJobsSchema = new mongoose.Schema({
     JobType: String,
     Experience: Number,
     Skills:[String],
+    Description:String,
     Status:String
 })
 

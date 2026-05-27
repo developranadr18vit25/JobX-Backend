@@ -12,8 +12,10 @@ const handleApply = (async(req, res) => {
     const decoded=jwt.verify(token,process.env.ACCESS_TOKEN_SECRET);
     const userId=decoded.UserId;   
     const jobId=Number(req.body.JobId);
+    const resumeLink=req.body.ResumeLink;
+    const message=req.body.Message;
 
-    const duplicate=appliedJobs.find({JobId:jobId , UserId:userId});
+    const duplicate=await appliedJobs.findOne({JobId:jobId , UserId:userId});
 
     if(duplicate){
         return res.status(409).json({
@@ -21,9 +23,11 @@ const handleApply = (async(req, res) => {
         })
     }
 
-    await appliedJobs.create({JobId:jobId , UserId:userId , Status:"Pending"});
+    await appliedJobs.create({JobId:jobId , UserId:userId , ResumeLink:resumeLink , Message:message,  Status:"Pending"});
 
-    return res.status(401).json({
+    console.log("Job Applied")
+
+    return res.status(201).json({
         message:"Job applied Successfully"
     });
 })

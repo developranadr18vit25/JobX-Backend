@@ -32,6 +32,8 @@ newJobsSchema.index({Location:1 , JobType:1})
 const appliedJobsSchema = new mongoose.Schema({
     JobId: Number,
     UserId: Number,
+    ResumeLink:String,
+    Message:String,
     Status:String
 })
 

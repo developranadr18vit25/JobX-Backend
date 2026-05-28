@@ -10,6 +10,9 @@ const authorization=require("../middleware/authorization")
 router.route("/newJob") //  USER APPLY FOR A JOB
     .post(verification.verifyJWT, authorization.handleAuthorization("Applicant"), applyController.handleApply); 
 
+router.route("/newJob/check") // TO CHECK IF USER HAS ALREADY APPLIED FOR JOB OR NOT 
+    .post(verification.verifyJWT , authorization.handleAuthorization("Applicant") , applyController.alreadyApplied);
+
 router.route("/:jobid/applicants")  // RECRUITER VIEWS APPLICANT FOR RESPECTIVE JOB 
     .get(verification.verifyJWT, authorization.handleAuthorization("Recruiter"),applyController.handleApplicants)
 

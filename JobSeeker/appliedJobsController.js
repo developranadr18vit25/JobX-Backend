@@ -14,6 +14,7 @@ const handleApply = (async(req, res) => {
     const jobId=Number(req.body.JobId);
     const resumeLink=req.body.ResumeLink;
     const message=req.body.Message;
+    const email=req.body.Email;
 
     const duplicate=await appliedJobs.findOne({JobId:jobId , UserId:userId});
 
@@ -23,7 +24,7 @@ const handleApply = (async(req, res) => {
         })
     }
 
-    await appliedJobs.create({JobId:jobId , UserId:userId , ResumeLink:resumeLink , Message:message,  Status:"Pending"});
+    await appliedJobs.create({JobId:jobId , UserId:userId , Email:email, ResumeLink:resumeLink , Message:message,  Status:"Pending"});
 
     console.log("Job Applied")
 
@@ -64,4 +65,24 @@ const handleApplicants=(async(req,res)=>{
     return res.json(result);
 })
 
-module.exports={handleApply , handleApplicants}
+const alreadyApplied=(async (req,res)=>{
+
+    const jobid=Number(req.body.JobId);
+    const token=req.headers.authorization.split(" ")[1];
+    const decoded=jwt.verify(token,process.env.ACCESS_TOKEN_SECRET);
+    const userId=decoded.UserId;
+
+    const duplicate=await appliedJobs.findOne({JobId:jobid , UserId:userId});
+
+    if(duplicate){
+        return res.status(409).json({
+            Message:"Job already Applied"
+        })
+    };
+
+    return res.status(201).json({
+        Message:"Job not applied yet"
+    })
+})
+
+module.exports={handleApply , handleApplicants , alreadyApplied}

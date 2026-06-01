@@ -35,7 +35,8 @@ const appliedJobsSchema = new mongoose.Schema({
     Email:String,
     ResumeLink:String,
     Message:String,
-    Status:String
+    Status:String,
+    AppliedOn:String
 })
 
 const appliedJobs = mongoose.model("appliedJobs", appliedJobsSchema, "appliedJobs");

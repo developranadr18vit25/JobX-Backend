@@ -24,7 +24,7 @@ const handleApply = (async(req, res) => {
         })
     }
 
-    await appliedJobs.create({JobId:jobId , UserId:userId , Email:email, ResumeLink:resumeLink , Message:message,  Status:"Pending"});
+    await appliedJobs.create({JobId:jobId , UserId:userId , Email:email, ResumeLink:resumeLink , Message:message,  Status:"Pending" , AppliedOn:new Date()});
 
     console.log("Job Applied")
 

@@ -20,7 +20,7 @@ const displayAppliedJobs=(async(req,res)=>{
         },
         {
             $lookup:{
-                from:"newjobs",
+                from:"availableJobs",
                 localField:"JobId",
                 foreignField:"JobId",
                 as:"jobDetails"
@@ -46,7 +46,7 @@ const displayAppliedJobs=(async(req,res)=>{
         TotalApplications:jobs.length,
         Pending:jobs.filter(job=>job.Status==="Pending").length,
         Shortlisted:jobs.filter(job=>job.Status==="Shortlisted").length,
-        Rejected:jobs.filter(jobs=>jobs.Status==="Rejected").length,
+        Rejected:jobs.filter(job=>job.Status==="Rejected").length,
         AppliedJobs:jobsApplied
     })
 

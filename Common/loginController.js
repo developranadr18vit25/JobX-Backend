@@ -64,7 +64,11 @@ const handleLogin = (async (req, res) => {
 
 
     res.status(200).json({
-        AccessToken:accessToken
+        AccessToken:accessToken,
+        user:{
+            Username:UsernameMatch.Username,
+            UserId:UsernameMatch.UserId
+        }
     });
     console.log("Login successful");
 })

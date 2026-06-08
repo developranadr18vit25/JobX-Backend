@@ -19,6 +19,7 @@ const cookieParser=require("cookie-parser");
 const refreshRouter=require("./routes/refresh.js");
 const changePersonalDataRouter=require("./routes/changePersonalData.js") //done
 const userProfileRouter=require("./routes/userProfile.js");
+const logOutRouter=require("./routes/logOut.js")
 
 app.use(express.json());
 app.use(cookieParser());
@@ -38,6 +39,7 @@ app.use("/refresh" , refreshRouter);
 app.use("/reset" , resetPwdRouter); //done
 app.use("/account", changePersonalDataRouter); //done
 app.use("/my" , userProfileRouter);
+app.use("/logOut" , logOutRouter);
 
 
 

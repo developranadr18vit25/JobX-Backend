@@ -3,10 +3,9 @@ require("dotenv").config()
 
 const handleAuthorization = ((...allowedRoles) => {
     return (req, res, next) => {
+        
 
-        const hasRole=req.user.Roles.some(el=>
-            allowedRoles.includes(el)
-        )
+        const hasRole=allowedRoles.includes(req.user.Roles)
 
         if(!hasRole){
             return res.status(403).json({

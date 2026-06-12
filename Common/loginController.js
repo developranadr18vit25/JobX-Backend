@@ -67,7 +67,8 @@ const handleLogin = (async (req, res) => {
         AccessToken:accessToken,
         user:{
             Username:UsernameMatch.Username,
-            UserId:UsernameMatch.UserId
+            UserId:UsernameMatch.UserId,
+            Role:UsernameMatch.Roles
         }
     });
     console.log("Login successful");

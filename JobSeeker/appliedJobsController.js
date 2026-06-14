@@ -75,13 +75,13 @@ const alreadyApplied=(async (req,res)=>{
     const duplicate=await appliedJobs.findOne({JobId:jobid , UserId:userId});
 
     if(duplicate){
-        return res.status(409).json({
-            Message:"Job already Applied"
+        return res.status(201).json({
+            Applied:true
         })
     };
 
     return res.status(201).json({
-        Message:"Job not applied yet"
+        Applied:false
     })
 })
 

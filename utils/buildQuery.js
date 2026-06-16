@@ -35,14 +35,6 @@ function buildQuery(params) {
         query.Salary = { $lte: Number(params.maxSalary) };
     }
 
-    // if(params.minExp){
-    //     query.Experience={$gte: Number(params.minExp)};
-    // }
-
-    // if(params.maxExp){
-    //     query.Experience={$lte: Number(params.maxExp)};
-    // }
-
     if (params.minExp && params.maxExp) {
         query.Experience = { $gte: Number(params.minExp), $lte: Number(params.maxExp) };
     }

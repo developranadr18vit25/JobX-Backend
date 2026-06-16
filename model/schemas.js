@@ -15,6 +15,7 @@ userSchema.index({Username:1 , Password:1});
 
 const newJobsSchema = new mongoose.Schema({
     JobId: Number,
+    RecruiterId:Number,
     Company: String,
     Title: String,
     Location: String,

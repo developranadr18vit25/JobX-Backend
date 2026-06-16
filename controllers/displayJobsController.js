@@ -37,4 +37,16 @@ const handleDetailJob = (async (req, res) => {
 
 })
 
-module.exports = { handleDisplayJobs, handleDetailJob };
+const handleRecruiterJobs=(async(req,res)=>{
+
+    const recruitId=req.user.UserId;
+
+    const alljobs=await newJobs.find({RecruiterId:recruitId});
+
+    return res.json({
+        Jobs:alljobs
+    });
+
+})
+
+module.exports = { handleDisplayJobs, handleDetailJob,handleRecruiterJobs };

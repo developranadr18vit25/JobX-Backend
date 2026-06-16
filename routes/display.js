@@ -10,6 +10,9 @@ const verify=require("../middleware/authentication.js")
 router.route("/jobs") // USER CAN EITHER VIEW THE AVAILABLE JOBS
     .get(displayController.handleDisplayJobs)
 
+router.route("/jobs/recruiter")
+    .get(verification.verifyJWT , authorization.handleAuthorization("Recruiter") , displayController.handleRecruiterJobs)
+    
 router.route("/jobs/applied")
     .get(verification.verifyJWT , authorization.handleAuthorization("Applicant") , appliedDisplayController.displayAppliedJobs)
 

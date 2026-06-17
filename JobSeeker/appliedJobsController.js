@@ -39,30 +39,42 @@ const handleApplicants=(async(req,res)=>{
     const page=Number(req.query.page)||1;
     const limit=Number(req.query.limit)||10;
     const skip=(page-1)*limit;
-    const {minExperience,maxExperience, status, keyword}=req.query;
+    // const {minExperience,maxExperience, status, keyword}=req.query;
 
-    let filter=buildFilter(req.query);
+    // let filter=buildFilter(req.query);
 
-    const applicants=await appliedJobs.find({JobId:jobid , ...filter}).skip(skip).limit(limit);
+    const applicants=await appliedJobs.aggregate([
+        {
+            $match:{JobId:jobid}
+        }, 
+        {
+            $lookup:{
+                from:"userProfile",
+                localField:"UserId",
+                foreignField:"UserId",
+                as:"jobApplicants"
+            }
+        },
+        {
+            $unwind:"$jobApplicants"
+        },
+        {
+            $project:{
+                JobId:1,
+                UserId:1,
+                Name:"$jobApplicants.Name",
+                Age:"$jobApplicants.Age",
+                Qualification:"$jobApplicants.Qualification",
+                Skills:"$jobApplicants.Skills",
+                Experience:"$jobApplicants.Experience"
 
-    const userids=applicants.map(e=>e.UserId);
-    const statusMap=new Map();
-    applicants.forEach(a=>{
-        statusMap.set(a.UserId, a.Status)
-    })
+            }
+        }
+    ])
 
-    if("Status" in filter){
-        filter={};
-    }
-
-    const detailOfApplicant= await userProfile.find({UserId:{$in:userids} , ...filter});
-
-    const result=detailOfApplicant.map(user=>({
-        ...user.toObject(),
-        Status:statusMap.get(user.UserId)
-    }))
-
-    return res.json(result);
+    return res.status(200).json({
+        Applicants:applicants
+    });
 })
 
 const alreadyApplied=(async (req,res)=>{

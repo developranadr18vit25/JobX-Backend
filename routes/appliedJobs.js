@@ -13,8 +13,8 @@ router.route("/newJob") //  USER APPLY FOR A JOB
 router.route("/newJob/check") // TO CHECK IF USER HAS ALREADY APPLIED FOR JOB OR NOT 
     .post(verification.verifyJWT , authorization.handleAuthorization("Applicant") , applyController.alreadyApplied);
 
-router.route("/:jobid/applicants")  // RECRUITER VIEWS APPLICANT FOR RESPECTIVE JOB 
-    .get(verification.verifyJWT, authorization.handleAuthorization("Recruiter"),applyController.handleApplicants)
+router.route("/job/applicants")  // RECRUITER VIEWS APPLICANT FOR RESPECTIVE JOB 
+    .post(verification.verifyJWT, authorization.handleAuthorization("Recruiter"),applyController.handleCountApplicants)
 
 router.route("/:jobid/applicants/:userid/status") // RECRUITER CAN CHANGE THE STATUS OF THE APPLICANT
     .put(verification.verifyJWT, authorization.handleAuthorization("Recruiter"), updateStatusController.handleUpdateStatus)
